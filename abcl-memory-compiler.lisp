@@ -17,10 +17,10 @@
     (java:jcall "useParentClassLoader" memory-compiler current-classloader)
 
     (java:jcall "useOptions" memory-compiler
-                  (java:jarray-from-list
-                   (list "-classpath"
-                         (format nil "~{~a~^: ~}" (get-classpath-jars))
-                         "-Xlint:none")))
+                (java:jarray-from-list
+                 (list "-classpath"
+                       (format nil "~{~a~^: ~}" (get-classpath-jars))
+                       "-Xlint:none")))
     (java:jcall
      "compile"
      memory-compiler
