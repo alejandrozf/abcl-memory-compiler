@@ -14,14 +14,14 @@ To load "abcl-memory-compiler":
 ; Loading "abcl-memory-compiler"
 [package abcl-memory-compiler]
 (:ABCL-MEMORY-COMPILER)
-CL-USER> (abcl-memory-compiler:compile-to-class "org.mdkt.HelloClass"
-          "package org.mdkt;
+CL-USER> (abcl-memory-compiler:compile-to-class "org.azf.HelloClass"
+          "package org.azf;
            public class HelloClass {
                   public String hello() { return \"hello\"; }
            }")
-#<java class org.mdkt.HelloClass>
+#<java class org.azf.HelloClass>
 CL-USER> (jnew *)
-#<org.mdkt.HelloClass org.mdkt.HelloClass@32eaa91 {57415E14}>
+#<org.azf.HelloClass org.azf.HelloClass@32eaa91 {57415E14}>
 CL-USER> (jcall "hello" *)
 "hello"
 CL-USER>

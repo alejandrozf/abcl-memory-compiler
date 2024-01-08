@@ -3,8 +3,8 @@
 (in-package #:abcl-memory-compiler)
 
 
-(defun get-classpath-jars ()
-  (cdar (java:dump-classpath (java:get-current-classloader))))
+(defun get-classpath-jars (current-classloader)
+  (cdar (java:dump-classpath current-classloader)))
 
 
 (defun compile-to-class (class-name class-source-code)
@@ -19,7 +19,7 @@
     (java:jcall "useOptions" memory-compiler
                 (java:jarray-from-list
                  (list "-classpath"
-                       (format nil "~{~a~^: ~}" (get-classpath-jars))
+                       (format nil "~{~a~^: ~}" (get-classpath-jars current-classloader))
                        "-Xlint:none")))
     (java:jcall
      "compile"
