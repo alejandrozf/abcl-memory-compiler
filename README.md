@@ -24,8 +24,23 @@ CL-USER> (jnew *)
 #<org.azf.HelloClass org.azf.HelloClass@32eaa91 {57415E14}>
 CL-USER> (jcall "hello" *)
 "hello"
+CL-USER> (abcl-memory-compiler:compile-to-class
+          "org.azf.lisp.Funcaller"
+          "package org.azf.lisp;
+          import org.armedbear.lisp.LispObject;
+          public class Funcaller {
+                  public LispObject funcall(LispObject obj) {return obj.execute();}
+          }")
+#<java class org.azf.lisp.Funcaller>
+CL-USER> (jnew *)
+#<org.azf.lisp.Funcaller org.azf.lisp.Funcaller@23e856d1 {13D049D6}>
+CL-USER> (jcall "funcall" * (lambda () 1))
+1
 CL-USER>
 ```
+
+Note: For use external libraries use (java:get-current-classloader) as the third parameter
+
 
 ## License
 
