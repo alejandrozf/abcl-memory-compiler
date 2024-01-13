@@ -34,3 +34,32 @@
      memory-compiler
      class-name
      (java:jcall "toString" string-builder))))
+
+
+(defun compile-to-multiple-classes
+    (classes-code-pairs
+     &optional
+       (classloader
+        (java:jnew "org.armedbear.lisp.JavaClassLoader"
+                   (java:jcall "getClassLoader"
+                               (java:jclass "org.armedbear.lisp.LispObject")))))
+  (let ((memory-compiler (java:jstatic "newInstance" "org.mdkt.compiler.InMemoryJavaCompiler"))
+        (current-classloader classloader))
+
+    (java:jcall "useParentClassLoader" memory-compiler current-classloader)
+
+    (let ((classpath-jars (get-classpath-jars current-classloader)))
+      (java:jcall "useOptions" memory-compiler
+                  (java:jarray-from-list
+                   (append
+                    (if classpath-jars
+                        (list "-classpath"
+                              (format nil "~{~a~^: ~}" classpath-jars)))
+                    (list "-Xlint:none")))))
+
+    (loop :for (class-name class-source-code) :in classes-code-pairs
+          :do (java:jcall "addSource" memory-compiler class-name class-source-code))
+
+    (java:jcall
+     "compileAll"
+     memory-compiler)))
