@@ -8,16 +8,20 @@
 
 
 (defun compile-to-class (class-name class-source-code
-                         &optional
+                         &key
                            (classloader
                             (java:jnew "org.armedbear.lisp.JavaClassLoader"
                                        (java:jcall "getClassLoader"
-                                                   (java:jclass "org.armedbear.lisp.LispObject")))))
+                                                   (java:jclass "org.armedbear.lisp.LispObject"))))
+                           extra-classpaths)
   (let ((string-builder (java:jnew "java.lang.StringBuilder"))
         (memory-compiler (java:jstatic "newInstance" "org.mdkt.compiler.InMemoryJavaCompiler"))
         (current-classloader classloader))
 
     (java:jcall "append" string-builder class-source-code)
+
+    (loop :for classpath :in extra-classpaths
+          :do (java:jcall "addURL" current-classloader classpath))
 
     (java:jcall "useParentClassLoader" memory-compiler current-classloader)
 
