@@ -42,13 +42,17 @@
 
 (defun compile-to-multiple-classes
     (classes-code-pairs
-     &optional
+     &key
        (classloader
         (java:jnew "org.armedbear.lisp.JavaClassLoader"
                    (java:jcall "getClassLoader"
-                               (java:jclass "org.armedbear.lisp.LispObject")))))
+                               (java:jclass "org.armedbear.lisp.LispObject"))))
+       extra-classpaths)
   (let ((memory-compiler (java:jstatic "newInstance" "org.mdkt.compiler.InMemoryJavaCompiler"))
         (current-classloader classloader))
+
+    (loop :for classpath :in extra-classpaths
+          :do (java:jcall "addURL" current-classloader classpath))
 
     (java:jcall "useParentClassLoader" memory-compiler current-classloader)
 
