@@ -1,0 +1,15 @@
+ (abcl-memory-compiler:compile-to-class
+          "org.azf.SimpleServer"
+          source
+          :extra-classpaths (list (jnew "java.net.URL" "file:////Users/alejandrozf/.m2/repository/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar"))) GD!!!
+
+(abcl-memory-compiler:compile-to-class
+          "org.azf.lisp.Funcaller"
+          "package org.azf.lisp;
+          import org.armedbear.lisp.LispObject;
+          public class Funcaller {
+                  public LispObject funcall(LispObject obj) {return obj.execute();}
+          }"
+          :extra-classpaths (list
+                             (jnew "java.net.URL" "file:////Users/alejandrozf/.m2/repository/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar")
+                             (jnew "java.net.URL" "file:///Users/alejandrozf/development/projects/abcl/dist/abcl.jar"))) GD!!!
