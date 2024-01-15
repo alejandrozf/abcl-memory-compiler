@@ -36,6 +36,10 @@ CL-USER> (jnew *)
 #<org.azf.lisp.Funcaller org.azf.lisp.Funcaller@23e856d1 {13D049D6}>
 CL-USER> (jcall "funcall" * (lambda () 1))
 1
+CL-USER> (abcl-memory-compiler:compile-to-multiple-classes
+          (list (list "A" "public class A{ public B b() { return new B(); }}")
+                (list "B" "public class B{ public String toString() { return \"B!\"; }}")))
+#<java.util.HashMap {A=class A, B=class B} {367B9E1D}>
 CL-USER>
 ```
 
