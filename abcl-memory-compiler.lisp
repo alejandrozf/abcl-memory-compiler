@@ -71,3 +71,18 @@
      (loop :for cp :in classpath
            :collect (unless (equal cp "")
                       (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp))))))))
+
+
+(defun quick-compile-to-multiple-classes (classes-code-pairs)
+  (let ((classpath (uiop:split-string
+                    (java:jstatic
+                     "getProperty"
+                     "java.lang.System"
+                     "java.class.path"))))
+    (compile-to-multiple-classes
+     classes-code-pairs
+     :classloader (java:get-current-classloader)
+     :extra-classpaths
+     (loop :for cp :in classpath
+           :collect (unless (equal cp "")
+                      (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp))))))))

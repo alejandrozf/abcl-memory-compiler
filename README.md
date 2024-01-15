@@ -43,8 +43,6 @@ CL-USER> (abcl-memory-compiler:compile-to-multiple-classes
 CL-USER>
 ```
 
-Note: For use external libraries use (java:get-current-classloader) as the third parameter
-
 
 ## License
 
