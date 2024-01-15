@@ -71,3 +71,19 @@
     (java:jcall
      "compileAll"
      memory-compiler)))
+
+
+(defun quick-compile-to-class (class-name source)
+  (let ((classpath (uiop:split-string
+                    (java:jstatic
+                     "getProperty"
+                     "java.lang.System"
+                     "java.class.path"))))
+    (compile-to-class
+     class-name
+     source
+     :classloader (java:get-current-classloader)
+     :extra-classpaths
+     (loop :for cp :in classpath
+           :collect (unless (equal cp "")
+                      (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp))))))))
