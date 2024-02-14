@@ -12,4 +12,34 @@
           }"
           :extra-classpaths (list
                              (jnew "java.net.URL" "file:////Users/alejandrozf/.m2/repository/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar")
-                             (jnew "java.net.URL" "file:///Users/alejandrozf/development/projects/abcl/dist/abcl.jar"))) GD!!!
+                             (jnew "java.net.URL" "file:///Users/alejandrozf/development/projects/abcl/dist/abcl.jar")))
+
+
+CL-USER> (abcl-memory-compiler:compile-to-class
+              "com.azf.gen.ABC"
+                  "package com.azf.gen;
+                   import org.armedbear.lisp.Primitive;
+                   import org.armedbear.lisp.LispObject;
+                   import org.armedbear.lisp.Lisp;
+                   public class ABC {
+                   public static final Primitive REMEMBER =
+                          new Primitive(\"remember1\", Lisp.PACKAGE_SYS, true)
+                      {
+                       @Override
+                       public LispObject execute(LispObject key, LispObject value)
+
+                       {
+                       return Lisp.NIL;
+                       }
+                      };
+                   public ABC() {
+                       System.out.println(\"inside constructor\");
+                   }}")
+#<java class com.azf.gen.ABC>
+CL-USER> (jnew *)
+#<com.azf.gen.ABC com.azf.gen.ABC@3a5ea94d {2CB56405}>
+CL-USER> (sys::remember1 "asd" 4)
+NIL
+CL-USER>
+
+;; GD!!!

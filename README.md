@@ -53,7 +53,8 @@ Notes:
 
 1- Use the quick-compile-* functions instead of the simple compile-* functions, they are more general and can even compile code that mix external libs and ABCL internal classes
 
-2- Possible usage of this library:
+2- Possible usage of this library (see 'internal-docs' folder):
 
    - Adapt any external Java library to ABCL
    - In memory patches to ABCL at some extent
+      - Add new primitives!
