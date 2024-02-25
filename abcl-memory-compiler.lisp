@@ -28,21 +28,6 @@
      (progn ,@body)))
 
 
-(defun compile-to-multiple-classes (classes-code-pairs
-                                    &key
-                                      (classloader (java:jnew "org.armedbear.lisp.JavaClassLoader"))
-                                      extra-classpaths)
-  (with-dynamic-compiler
-    ((loop :for (class-name class-source-code) :in classes-code-pairs
-           :do (java:jcall "addSource" memory-compiler class-name class-source-code))
-
-     (java:jcall
-      "compileAll"
-      memory-compiler))
-    :classloader classloader
-    :extra-classpaths extra-classpaths))
-
-
 (defun compile-to-class (class-name source)
   (labels ((compile-to-class-aux (class-name-aux class-source-code-aux
                                   &key
