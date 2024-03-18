@@ -45,15 +45,16 @@
                       (java:jstatic
                        "getProperty"
                        "java.lang.System"
-                       "java.class.path"))))
+                       "java.class.path")
+                      :separator (list (aref (java:jstatic "getProperty" "java.lang.System" "path.separator") 0)))))
       (compile-to-class-aux
        class-name
        source
        :classloader (java:get-current-classloader)
        :extra-classpaths
        (loop :for cp :in classpath
-             :collect (unless (equal cp "")
-                        (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp)))))))))
+             :unless (equal cp "")
+             :collect (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp))))))))
 
 
 (defun compile-to-multiple-classes (classes-code-pairs)
@@ -75,11 +76,12 @@
                       (java:jstatic
                        "getProperty"
                        "java.lang.System"
-                       "java.class.path"))))
+                       "java.class.path")
+                      :separator (list (aref (java:jstatic "getProperty" "java.lang.System" "path.separator") 0)))))
       (compile-to-multiple-classes-aux
        classes-code-pairs
        :classloader (java:get-current-classloader)
        :extra-classpaths
        (loop :for cp :in classpath
-             :collect (unless (equal cp "")
-                        (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp)))))))))
+             :unless (equal cp "")
+             :collect (java:jcall "toURL" (java:jcall "toURI" (java:jnew "java.io.File" cp))))))))
