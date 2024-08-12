@@ -1,8 +1,14 @@
 # abcl-memory-compiler
 ### _Alejandro Zamora Fonseca <ale2014.zamora@gmail.com>_
 
-A way to compile source code for create Java classes at runtime!
-This a wrapper over the library InMemoryJavaCompiler(https://github.com/trung/InMemoryJavaCompiler)
+A way to compile Java source code for create Java classes at runtime with ABCL!
+
+Internally it uses the Java library InMemoryJavaCompiler(https://github.com/trung/InMemoryJavaCompiler)
+
+ABCL is very good for interact with external Java libraries.
+But there are cases when this integration is not enougth.
+With this library you have now the maximum flexibility by writing Java code directly to create runtime clases
+and this way integrate any Java code with ABCL.
 
 Usage:
 
@@ -21,6 +27,7 @@ To load "abcl-memory-compiler":
 ; Loading "abcl-memory-compiler"
 [package abcl-memory-compiler]
 (:ABCL-MEMORY-COMPILER)
+
 CL-USER> (abcl-memory-compiler:compile-to-class "org.azf.HelloClass"
           "package org.azf;
            public class HelloClass {
@@ -117,6 +124,42 @@ SourceFile: \"HelloClass.java\"
 CL-USER>
 ```
 
+Now let's see something more interesting:
+
+Let's say that, for some reason, you need to create a Java runtime class that needs to have a boolean parameter in some method, in this case the java:jnew-runtime-class function can't help you, it has limitations on translating the arguments of methods.
+
+```
+CL-USER> (java:jnew-runtime-class
+ "Foo"
+ :methods (list
+           (list "bar" :int '(:boolean)
+                 (lambda (this that) (print (list this that)) 23))))
+; Evaluation aborted on #<SIMPLE-ERROR {75F08073}>.
+CL-USER>
+```
+
+On the other hand if you use this library you can do instead:
+```
+CL-USER> (defparameter *java-code*
+      "import org.armedbear.lisp.LispObject;
+       import org.armedbear.lisp.Lisp;
+       import org.armedbear.lisp.LispThread;
+       import org.armedbear.lisp.JavaObject;
+       public class Foo {
+           public LispObject bar(boolean arg, LispObject obj){
+               return Lisp.funcall(obj, new LispObject[]{JavaObject.getInstance(this), JavaObject.getInstance(arg)}, LispThread.currentThread());
+           }
+       }
+       ")
+*JAVA-CODE*
+CL-USER> (defparameter *foo-java-class* (abcl-memory-compiler:compile-to-class "Foo" *java-code*))
+*FOO-JAVA-CLASS*
+CL-USER> (jcall "bar" (jnew *foo-java-class*) t (lambda (this that) (print (list this that)) 23))
+
+(#<Foo Foo@19feee8a {19FE365C}> T)
+23
+CL-USER>
+```
 
 ## License
 
