@@ -100,8 +100,6 @@ CL-USER> (abcl-memory-compiler:compile-to-class
 #<java class org.azf.SimpleServer>
 CL-USER> (jnew * (jnew "java.net.InetSocketAddress" "localhost" 5060))
 #<org.azf.SimpleServer org.azf.SimpleServer@3c25aca3 {E33D5B6}>
-CL-USER> 1
-1
 CL-USER>
 
 ;; GD!!!
