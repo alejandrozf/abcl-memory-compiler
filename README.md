@@ -161,6 +161,12 @@ CL-USER> (jcall "bar" (jnew *foo-java-class*) t (lambda (this that) (print (list
 CL-USER>
 ```
 
+And there is even more!
+
+If you want to have a nicer Slime experience you can load the file 'slime-integration.el' on it.
+And just run the ELisp function 'compile-java-code-to-abcl' (or the shortcut key '<f5> j') in a buffer with Java code.
+After you type the class name in the minibuffer, in sync with the code in the buffer, the code will be compiled by the function 'abcl-memory-compiler:compile-to-class' and the resulting class object will be inserted directly in the Slime REPL.
+
 ## License
 
 MIT
