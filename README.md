@@ -1,5 +1,5 @@
 # abcl-memory-compiler
-### _Alejandro Zamora Fonseca <ale2014.zamora@gmail.com>_
+### _Alejandro Zamora Fonseca <allejjandrozf@gmail.com>_
 
 A way to compile Java source code for create Java classes at runtime with ABCL!
 
@@ -169,6 +169,26 @@ After you type the class name in the minibuffer, in sync with the code in the bu
 See the file 'slime-integration.gif' for a visual explanation.
 
 <img src="slime-integration.gif" align="left"/>
+
+
+If you like the library and want some specific commercial support on it or for ABCL in general I'm available.
+
+I'm offering consulting and development services tailored to help you get the most out of ABCL on the JVM. Whether you need custom development, integration, performance optimization, or training, I’m here to support your project.
+
+Services include:
+
+Custom application development with ABCL
+Integration of Lisp and Java ecosystems
+Performance optimization and refactoring
+Tailored training and support
+Let's Collaborate: If you're looking to enhance your project with ABCL, feel free to reach out and discuss how we can work together.
+
+Contact me at any of the following:
+
+allejjandrozf@gmail.com
+
+https://www.linkedin.com/in/alejandrozamorafonseca/
+
 
 ## License
 
