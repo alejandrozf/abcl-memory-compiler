@@ -168,6 +168,8 @@ And just run the ELisp function 'compile-java-code-to-abcl' (or the shortcut key
 After you type the class name in the minibuffer, in sync with the code in the buffer, the code will be compiled by the function 'abcl-memory-compiler:compile-to-class' and the resulting class object will be inserted directly in the Slime REPL.
 See the file 'slime-integration.gif' for a visual explanation.
 
+<img src="slime-integration.gif" align="left"/>
+
 ## License
 
 MIT
