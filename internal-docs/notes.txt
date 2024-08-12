@@ -1,20 +1,3 @@
- (abcl-memory-compiler:compile-to-class
-          "org.azf.SimpleServer"
-          source
-          :extra-classpaths (list (jnew "java.net.URL" "file:////Users/alejandrozf/.m2/repository/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar"))) GD!!!
-
-(abcl-memory-compiler:compile-to-class
-          "org.azf.lisp.Funcaller"
-          "package org.azf.lisp;
-          import org.armedbear.lisp.LispObject;
-          public class Funcaller {
-                  public LispObject funcall(LispObject obj) {return obj.execute();}
-          }"
-          :extra-classpaths (list
-                             (jnew "java.net.URL" "file:////Users/alejandrozf/.m2/repository/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar")
-                             (jnew "java.net.URL" "file:///Users/alejandrozf/development/projects/abcl/dist/abcl.jar")))
-
-
 CL-USER> (abcl-memory-compiler:compile-to-class
               "com.azf.gen.ABC"
                   "package com.azf.gen;
@@ -40,42 +23,7 @@ CL-USER> (jnew *)
 #<com.azf.gen.ABC com.azf.gen.ABC@3a5ea94d {2CB56405}>
 CL-USER> (sys::remember1 "asd" 4)
 NIL
-CL-USER>
-
-
-
-CL-USER> (abcl-memory-compiler:compile-to-class
-              "com.azf.gen.ABC"
-                  "package com.azf.gen;
-                   import org.armedbear.lisp.Primitive;
-                   import org.armedbear.lisp.LispObject;
-                   import org.armedbear.lisp.Lisp;
-                   import org.armedbear.lisp.JavaObject;
-                   import java.util.ArrayList;
-                   public class ABC {
-                   public static final Primitive REMEMBER =
-                          new Primitive(\"new-array-list\", Lisp.PACKAGE_SYS, true)
-                      {
-                       @Override
-                       public LispObject execute(LispObject className)
-
-                       {
-                       return new JavaObject(new ArrayList());
-                       }
-                      };
-                   public ABC() {
-                       System.out.println(\"inside constructor\");
-                   }}")
-#<java class com.azf.gen.ABC>
-CL-USER> (time (loop :repeat 100000 :do (sys::new-array-list "asd")))
-0.1 seconds real time
-600085 cons cells
-NIL
-CL-USER> (time (loop :repeat 100000 :do (jnew "java.util.ArrayList")))
-0.134 seconds real time
-600085 cons cells
-NIL
-;; make sure you have the project :abcl-java-websocket in your ASDF discoverable folder and loaded previous to these following instructions
+CL-USER>;; make sure you have the project :abcl-java-websocket (https://gitlab.com/cl-projects/abcl-java-websocket) in your ASDF discoverable folder and loaded previous to these following instructions
 CL-USER> (ql:quickload :alexandria)
 To load "alexandria":
   Load 1 ASDF system:
