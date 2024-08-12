@@ -164,12 +164,3 @@ CL-USER>
 ## License
 
 MIT
-
-
-Notes:
-
-1- Possible usage of this library (see 'internal-docs' folder):
-
-   - Adapt any external Java library to ABCL
-   - In memory patches to ABCL at some extent
-      - Add new primitives!
