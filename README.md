@@ -13,7 +13,7 @@ and this way integrate any Java code with ABCL.
 
 Usage:
 
-```
+```lisp
 ;; In your .abclrc
 ;; (require :asdf)
 ;; (require :abcl-contrib)
