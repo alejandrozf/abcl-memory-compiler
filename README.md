@@ -129,7 +129,7 @@ Now let's see something more interesting:
 
 Let's say that, for some reason, you need to create a Java runtime class that needs to have a boolean parameter in some method, in this case the java:jnew-runtime-class function can't help you, it has limitations on translating the arguments of methods.
 
-```
+```lisp
 CL-USER> (java:jnew-runtime-class
  "Foo"
  :methods (list
@@ -140,7 +140,7 @@ CL-USER>
 ```
 
 On the other hand if you use this library you can do instead:
-```
+```lisp
 CL-USER> (defparameter *java-code*
       "import org.armedbear.lisp.LispObject;
        import org.armedbear.lisp.Lisp;
