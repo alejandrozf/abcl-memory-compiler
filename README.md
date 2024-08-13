@@ -172,6 +172,8 @@ See the file 'slime-integration.gif' for a visual explanation.
 <img src="slime-integration.gif" align="left"/>
 
 
+
+
 If you like the library and want some specific commercial support on it or for ABCL in general I'm available.
 
 I'm offering consulting and development services tailored to help you get the most out of ABCL on the JVM. Whether you need custom development, integration, performance optimization, or training, I’m here to support your project.
