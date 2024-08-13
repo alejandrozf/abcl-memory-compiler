@@ -4,6 +4,7 @@
 A way to compile Java source code for create Java classes at runtime with ABCL!
 
 Internally it uses the Java library InMemoryJavaCompiler(https://github.com/trung/InMemoryJavaCompiler)
+For using it, you will need to run your ABCL instance under a JDK.
 
 ABCL is very good for interact with external Java libraries.
 But there are cases when this integration is not enougth.
@@ -163,8 +164,8 @@ CL-USER>
 
 And there is even more!
 
-If you want to have a nicer Slime experience you can load the file 'slime-integration.el' on it.
-And just run the ELisp function 'compile-java-code-to-abcl' (or the shortcut key '<f5> j') in a buffer with Java code.
+If you want to have a nicer Slime experience you can load the file 'slime-integration.el' in Emacs.
+And just run the ELisp function 'compile-java-code-to-abcl' (or the shortcut key 'f5 j') in a buffer with the Java code.
 After you type the class name in the minibuffer, in sync with the code in the buffer, the code will be compiled by the function 'abcl-memory-compiler:compile-to-class' and the resulting class object will be inserted directly in the Slime REPL.
 See the file 'slime-integration.gif' for a visual explanation.
 
@@ -177,10 +178,14 @@ I'm offering consulting and development services tailored to help you get the mo
 
 Services include:
 
-Custom application development with ABCL
-Integration of Lisp and Java ecosystems
-Performance optimization and refactoring
-Tailored training and support
+- Custom application development with ABCL
+
+- Integration of Lisp and Java ecosystems
+
+- Performance optimization and refactoring
+
+- Tailored training and support
+
 Let's Collaborate: If you're looking to enhance your project with ABCL, feel free to reach out and discuss how we can work together.
 
 Contact me at any of the following:
@@ -189,7 +194,6 @@ allejjandrozf@gmail.com
 
 https://www.linkedin.com/in/alejandrozamorafonseca/
 
-
 ## License
 
-MIT
+Apache 2.0 license.
