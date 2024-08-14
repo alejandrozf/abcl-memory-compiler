@@ -11,6 +11,8 @@ But there are cases when this integration is not enougth.
 With this library you have now the maximum flexibility by writing Java code directly to create runtime clases
 and this way integrate any Java code with ABCL.
 
+Clone this repository to your Quicklisp discoverable location.
+
 Usage:
 
 ```lisp
